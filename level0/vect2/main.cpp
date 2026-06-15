@@ -1,54 +1,63 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 21:04:35 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/07/29 15:21:50 by fatkeski         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "vect2.hpp"
+#include <iostream>
 
-int main()
+int	main()
 {
-	vect2 v1; // 0, 0
-	vect2 v2(1, 2); // 1, 2
-	const vect2 v3(v2); // 1, 2
-	vect2 v4 = v2; // 1, 2
+	vect2		v1;
+	vect2		v2(1, 2);
+	const vect2	v3(v2);
+	vect2		v4 = v2;
 
-	std::cout << "v1: " << v1 << std::endl;
-	std::cout << "v1: " << "{" << v1[0] << ", " << v1[1] << "}" << std::endl;
-	std::cout << "v2: " << v2 << std::endl;
-	std::cout << "v3: " << v3 << std::endl;
-	std::cout << "v4: " << v4 << std::endl;
-	std::cout << v4++ << std::endl; // 2, 3
-	std::cout << ++v4 << std::endl; // 3, 4
-	std::cout << v4-- << std::endl; // 2, 3
-	std::cout << --v4 << std::endl; // 1, 2
+	std::cout << "=== Ostream ======================" << std::endl;
+	std::cout << "v1: " << v1 << "\t| should be {0, 0}" << std::endl;
+	std::cout << "v1: " << "{" << v1[0] << ", " << v1[1] << "}" << "\t| should be {0, 0}" << std::endl;
+	std::cout << "v2: " << v2 << "\t| should be {1, 2}" << std::endl;
+	std::cout << "v3: " << v3 << "\t| should be {1, 2}" << std::endl;
+	std::cout << "v4: " << v4 << "\t| should be {1, 2}" << std::endl;
 
+	std::cout << "\n=== Increments & Decrements ======" << std::endl;
+	std::cout << "v4: " << v4 << "\t| should be {1, 2}" << std::endl;
+	std::cout << "                |" << std::endl;
+	std::cout << "v4++: " << v4++ << "\t| should be {1, 2}" << std::endl;
+	std::cout << "++v4: " << ++v4 << "\t| should be {3, 4}" << std::endl;
+	std::cout << "v4--: " << v4-- << "\t| should be {3, 4}" << std::endl;
+	std::cout << "--v4: " << --v4 << "\t| should be {1, 2}" << std::endl;
+	std::cout << "                |" << std::endl;
+	std::cout << "v4: " << v4 << "\t| should be {1, 2}" << std::endl;
 
-	v2 += v3; // 2, 4
-	v1 -= v2; // -2, -4
-	v2 = v3 + v3 *2; // 3, 6
-	v2 = 3 * v2; // 9, 18
-	v2 += v2 += v3; // 20, 40
-	v1 *= 42; // -84, -168
+	std::cout << "\n=== Miscs ========================" << std::endl;
+
+	std::cout << "Initial values:" << std::endl;
+	std::cout << "v1: " << v1 << "\t| should be {0, 0}" << std::endl;
+	std::cout << "v2: " << v2 << "\t| should be {1, 2}" << std::endl;
+	std::cout << "v3: " << v3 << "\t| should be {1, 2}" << std::endl;
+	std::cout << "\nCompound and arithmetic ops:" << std::endl;
+	v2 += v3;
+	std::cout << "v2 += v3 -> " << v2 << "\t\t| should be {2, 4}" << std::endl;
+	v1 -= v2;
+	std::cout << "v1 -= v2 -> " << v1 << "\t\t| should be {-2, -4}" << std::endl;
+	v2 = v3 + v3 * 2;
+	std::cout << "v2 = v3 + v3 * 2 -> " << v2 << "\t| should be {3, 6}" << std::endl;
+	v2 = 3 * v2;
+	std::cout << "v2 = 3 * v2 -> " << v2 << "\t\t| should be {9, 18}" << std::endl;
+	v2 += v2 += v3;
+	std::cout << "v2 += v2 += v3 -> " << v2 << "\t| should be {20, 40}" << std::endl;
+	v1 *= 42;
+	std::cout << "v1 *= 42 -> " << v1 << "\t\t| should be {-84, -168}" << std::endl;
 	v1 = v1 - v1 + v1;
-
-	std::cout << "v1: " << v1 << std::endl;
-	std::cout << "v2: " << v2 << std::endl;
-	std::cout << "-v2: " << -v2 << std::endl;
-	std::cout << "v1[1]: " << v1[1] << std::endl;
+	std::cout << "v1 = v1 - v1 + v1 -> " << v1 << "| should be {-84, -168}" << std::endl;
+	std::cout << "\nUnary and access ops:" << std::endl;
+	std::cout << "-v2: " << -v2 << "\t| should be {-20, -40}\n" << std::endl;
+	std::cout << "v1[1]: " << v1[1] << "\t| should be -168" << std::endl;
+	std::cout << "v1[1] = 12      |" << std::endl;
 	v1[1] = 12;
-	std::cout << "v1[1]: " << v1[1] << std::endl;
-	std::cout << "v3[1]: " << v3[1] << std::endl;
-	std::cout << "v1 == v3: " << (v1 == v3) << std::endl;
-	std::cout << "v1 == v1: " << (v1 == v1) << std::endl;
-	std::cout << "v1 != v3: " << (v1 != v3) << std::endl;
-	std::cout << "v1 != v1: " << (v1 != v1) << std::endl;
+	std::cout << "v1[1]: " << v1[1] << "\t| should be 12\n" << std::endl;
+	std::cout << "v3[1]: " << v3[1] << "\t| should be 2" << std::endl;
 
-	return (0);
+	std::cout << "\n=== Comparisons ==================" << std::endl;
+
+	std::cout << "v1 == v3: " << (v1 == v3) << "\t| should be 0" << std::endl;
+	std::cout << "v1 == v1: " << (v1 == v1) << "\t| should be 1" << std::endl;
+	std::cout << "v1 != v3: " << (v1 != v3) << "\t| should be 1" << std::endl;
+	std::cout << "v1 != v1: " << (v1 != v1) << "\t| should be 0" << std::endl;
 }

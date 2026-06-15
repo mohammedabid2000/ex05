@@ -1,69 +1,43 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   bigint.hpp                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:17:26 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/08/01 13:57:18 by fatkeski         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#pragma once
 
-#ifndef BIGINT
-#define BIGINT
-
-#include <sstream>
 #include <iostream>
 #include <string>
-#include <cstdlib>
-
+#include <sstream>
 class bigint
 {
 	private:
-		std::string str;
-		//std::string result;
+		std::string big;
 	public:
-		bigint();
-		bigint(unsigned int num);
-		bigint(const bigint& source);
+		bigint(){big = "0";};
+		bigint(const bigint& other):big(other.big){};
+		bigint(const std::string &s):big(s){};
+		bigint(int a)
+		{
+			std::stringstream aa;
+			aa << a;
+			big = aa.str();
+		}
+		bigint& operator=(const bigint& other)
+		{
+			if(this != &other)
+				this->big = other.big;
+			return *this;
+		};
+		std::string getbig() const{return big;}
+		bigint operator+(const bigint &) const;
+		bigint& operator+=(const bigint &);
 
-		std::string getStr()const;
+		bigint &operator++();
+		bigint operator++(int);
+		bigint operator<<(int) const;
+		bigint &operator<<=(int);
+		bigint &operator>>=(const bigint&);
 
-		bigint& operator=(const bigint& source);
-
-		// addition
-		bigint operator+(const bigint& other)const;
-		bigint& operator+=(const bigint& other);
-
-		// increments
-		bigint& operator++(); // ++x
-		bigint operator++(int); // x++
-
-		// shift with num
-		bigint operator<<(unsigned int n)const;
-		bigint operator>>(unsigned int n)const;
-		bigint& operator<<=(unsigned int n);
-		bigint& operator>>=(unsigned int n);
-
-		//shift with object
-		bigint operator<<(const bigint& other)const;
-		bigint operator>>(const bigint& other)const;
-		bigint& operator<<=(const bigint& other);
-		bigint& operator>>=(const bigint& other);
-
-		// ==, !=, <, >, <=, >=
-		bool operator==(const bigint& other) const;
-		bool operator!=(const bigint& other) const;
-		bool operator<(const bigint& other) const;
-		bool operator>(const bigint& other) const;
-		bool operator<=(const bigint& other) const;
-		bool operator>=(const bigint& other) const;
-
-		// ~bigint();
-
+		bool operator<(const bigint&) const;
+		bool operator<=(const bigint&) const;
+		bool operator>(const bigint&) const;
+		bool operator>=(const bigint&) const;
+		bool operator==(const bigint&) const;
+		bool operator!=(const bigint&) const;
 };
-
-std::ostream& operator<<(std::ostream& output, const bigint& obj);
-
-#endif
+std::ostream& operator<<(std::ostream& out, const bigint &b);

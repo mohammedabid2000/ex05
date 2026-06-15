@@ -1,60 +1,44 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 14:27:41 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/07/26 18:22:04 by fatkeski         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "bigint.hpp"
+#include <iostream>
 
-int main(void)
+int	main()
 {
-	const bigint a(42);
-	bigint b(21), c, d(1337), e(d);
+	const bigint	a(42);
+	bigint			b(21);
+	bigint			c;
+	bigint			d(1337);
+	bigint			e(d);
 
-	// base test
-	std::cout << "a = " << a << std::endl;
-	std::cout << "b = " << b << std::endl;
-	std::cout << "c = " << c << std::endl;
-	std::cout << "d = " << d << std::endl;
-	std::cout << "e = " << e << std::endl;
+	std::cout << "=== Ostream ====================" << std::endl;
+	std::cout << "a = " << a << "\t\t| should be 42" << std::endl;
+	std::cout << "b = " << b << "\t\t| should be 21" << std::endl;
+	std::cout << "c = " << c << "\t\t| should be 0" << std::endl;
+	std::cout << "d = " << d << "\t| should be 1337" << std::endl;
+	std::cout << "e = " << e << "\t| should be 1337" << std::endl;
 
-	std::cout << "a + b = " << a + b << std::endl;
-	std::cout << "a + c = " << a + c << std::endl;
-	std::cout << "(c += a) = " << (c += a) << std::endl;
+	std::cout << "\n=== Additions ===================" << std::endl;
+	std::cout << "a + b = " << a + b << "\t| should be 63" << std::endl;
+	std::cout << "(c += a) = " << (c += a) << "\t| should be 42" << std::endl;
 
-	std::cout << "b = " << b << std::endl;
-	std::cout << "++b = " << ++b << std::endl;
-	std::cout << "b++ = " << b++ << std::endl;
+	std::cout << "\n=== Increments ==================" << std::endl;
+	std::cout << "b = " << b << "\t\t| should be 21" << std::endl;
+	std::cout << "++b = " << ++b << "\t| should be 22" << std::endl;
+	std::cout << "b++ = " << b++ << "\t| should be 22" << std::endl;
 
-	// b = 23, b << 10 -> 23000000000 + 42 = 23000000042
-	std::cout << "(b << 10) + 42 = " << ((b << 10) + 42) << std::endl;
-	std::cout << "(d <<= 4) = " << (d <<= 4) << ", d: " << d << std::endl;
-	std::cout << "(d >>= 2) = " << (d >>= (const bigint)2) << ", d: " << d << std::endl;
+	std::cout << "\n=== Shifts ======================" << std::endl;
+	std::cout << "(b << 10) + 42 = " << ((b << 10) + 42) << "\t| should be 230000000042" << std::endl;
+	std::cout << "(d <<= 4) = " << (d <<= 4) << "\t\t| should be 13370000" << std::endl;
+	std::cout << "(d >>= 2) = " << (d >>= (const bigint)2) << "\t\t| should be 133700" << std::endl;
 
-	std::cout << "a = " << a << std::endl; // a = 42
-	std::cout << "d = " << d << std::endl; // d = 5348
+	std::cout << "\n=== Ostream =====================" << std::endl;
+	std::cout << "a = " << a << "\t\t| should be 42" << std::endl;
+	std::cout << "d = " << d << "\t| should be 133700" << std::endl;
 
-	std::cout << "(d < a) = " << (d < a) << std::endl; // (d < a) = 0
-	std::cout << "(d > a) = " << (d > a) << std::endl; // (d > a) = 1
-	std::cout << "(d == d) = " << (d == d) << std::endl; // (d == d) = 1
-	std::cout << "(d != a) = " << (d != a) << std::endl; // (d != a) = 1
-	std::cout << "(d <= a) = " << (d <= a) << std::endl; // (d <= a) = 0
-	std::cout << "(d >= a) = " << (d >= a) << std::endl; // (d >= a) = 1
-
-	// extra
-	bigint x(12345678); bigint y(5);
-	std::cout << "(x << y) = " << (x << y) << ", x: " << x << ", y: " << y << std::endl;
-	std::cout << "(x >>= y) = " << (x >>= y) << ", x: " << x << ", y: " << y << std::endl;
-	std::cout << "(x >= y) = " << (x >= y) << ", x: " << x << ", y: " << y << std::endl;
-
-	std::cout << "x= " << (x <<= 5) << ", y= " << (y <<= 12) << std::endl;
-	std::cout << "(x >= y) = " << (x >= y) << ", x: " << x << ", y: " << y << std::endl;
-
-	return (0);
+	std::cout << "\n=== Comparisons =================" << std::endl;
+	std::cout << "(d < a) = " << (d < a) << "\t| should be 0" << std::endl;
+	std::cout << "(d <= a) = " << (d <= a) << "\t| should be 0" << std::endl;
+	std::cout << "(d > a) = " << (d > a) << "\t| should be 1" << std::endl;
+	std::cout << "(d >= a) = " << (d >= a) << "\t| should be 1" << std::endl;
+	std::cout << "(d == a) = " << (d == a) << "\t| should be 0" << std::endl;
+	std::cout << "(d != a) = " << (d != a) << "\t| should be 1" << std::endl;
 }
